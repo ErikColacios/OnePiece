@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/OnePiece/static/css/main.d413bf8d.css",
+    "main.js": "/OnePiece/static/js/main.ed5ff93e.js",
+    "static/media/wallpaper_onepiece.jpg": "/OnePiece/static/media/wallpaper_onepiece.ee1721c74a38e7c90732.jpg",
+    "static/media/login1_onepiece.jpg": "/OnePiece/static/media/login1_onepiece.d6f19bdcaae5271854f2.jpg",
+    "static/media/login2_onepiece.jpg": "/OnePiece/static/media/login2_onepiece.c40053e8c32ae66680ed.jpg",
+    "index.html": "/OnePiece/index.html",
+    "main.d413bf8d.css.map": "/OnePiece/static/css/main.d413bf8d.css.map",
+    "main.ed5ff93e.js.map": "/OnePiece/static/js/main.ed5ff93e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d413bf8d.css",
+    "static/js/main.ed5ff93e.js"
+  ]
+}
