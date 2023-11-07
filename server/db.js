@@ -57,8 +57,10 @@ app.use(
 const POSTGRES_URL = "postgres://default:uCmxVWyI06RX@ep-summer-lake-14260184-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb";
 
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+  connectionString: POSTGRES_URL + "?sslmode=require",
 })
+
+pool.connect()
 
 
 // Select del usuario que tiene la sesion 
