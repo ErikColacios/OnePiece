@@ -1,5 +1,6 @@
 const express = require("express");
 const mysql = require("mysql");
+const {sqlvercel} = require("@vercel/postgres");
 const {Pool} = require("pg");
 const cors = require("cors");
 const app = express();
@@ -45,14 +46,19 @@ app.use(
 //   database: "onepiece",
 // });
 
-const postgresDB = new Pool({
-  host: "localhost",
-  user: "postgres",
-  port: 5433,
-  password: "admin",
-  database: "onepiece"
-});
+// const postgresDB = new Pool({
+//   host: "localhost",
+//   user: "postgres",
+//   port: 5433,
+//   password: "admin",
+//   database: "onepiece"
+// });
 
+const POSTGRES_URL = "postgres://default:uCmxVWyI06RX@ep-summer-lake-14260184-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb";
+
+const pool = new Pool({
+  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+})
 
 
 // Select del usuario que tiene la sesion 
@@ -79,11 +85,16 @@ app.get("/Heroe", async (req, res) => {
   //   if (err) return res.json(err);
   //   return res.json(data);
   // });
-  const sql = `SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`;
-  postgresDB.query(sql, (err, data)=>{
-    if (err) return res.json(err);
-    return res.json(data.rows);
-  });
+  // -----
+  // const sql = `SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`;
+  // postgresDB.query(sql, (err, data)=>{
+  //   if (err) return res.json(err);
+  //   return res.json(data.rows);
+  // });
+
+  //----
+  const {rows} = await sqlvercel`SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`;
+
 });
 
 
