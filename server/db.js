@@ -60,7 +60,7 @@ const pool = new Pool({
   connectionString: POSTGRES_URL + "?sslmode=require",
 })
 
-pool.connect()
+
 
 
 // Select del usuario que tiene la sesion 
@@ -95,8 +95,17 @@ app.get("/Heroe", async (req, res) => {
   // });
 
   //----
-  const {rows} = await sql`SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`;
-  return res.json(rows);
+  const client = await pool.connect()
+
+  try{
+    const {rows} = await client.query(`SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`);
+    console.log(rows)
+    client.release()
+    res.json(rows);
+  }catch(error){
+    console.error('Error al consultar la base de datos', error);
+    res.status(500).json({ error: 'Error al consultar la base de datos' });
+  }
 });
 
 
