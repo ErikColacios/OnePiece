@@ -53,7 +53,7 @@ export default function Navbar(){
                     </li>
                 </ul>
             </div>
-            <div className="navbar-btn mr-6">
+            <div className="navbar-btn">
                 <Link to={`/login`} ><button className="btnEntrar text-xs">ENTRAR</button></Link>
             </div>
             {botonPerfil && (
