@@ -120,46 +120,98 @@ app.get("/:categoria/:id", async (req, res) => {
     categoria
   ];
 
-  const client = await postgresDB.connect();
+  //const client = await postgresDB.connect();
 
-  const sql = `SELECT * FROM personajes WHERE id_personaje=$1 AND categoria_personaje=$2`;
+  //const sql = `SELECT * FROM personajes WHERE id_personaje=$1 AND categoria_personaje=$2`;
   // db.query(sql, values, (err, result) => {
   //   if (err) return res.json({ Message: "No se ha encontrado el personaje"});
   //   return res.json(result);
   // });
-  client.query(sql, values,(err, data)=>{
-    if (err) return res.json({ Message: "No se ha encontrado el personaje"});
-    return res.json(data.rows);
-  });
+  // client.query(sql, values,(err, data)=>{
+  //   if (err) return res.json({ Message: "No se ha encontrado el personaje"});
+  //   return res.json(data.rows);
+  // });
+
+
+
+  const client = await pool.connect()
+  try{
+    const {rows} = await client.query(`SELECT * FROM personajes WHERE id_personaje=$1 AND categoria_personaje=$2`, values);
+    console.log(rows)
+    client.release()
+    res.json(rows);
+  }catch(error){
+    console.error('Error al consultar la base de datos', error);
+    res.status(500).json({ error: 'Error al consultar la base de datos' });
+  }
+
 });
 
 
 // Select de todos los personajes VILLANOS
-app.get("/Villano", (req, res) => {
-  const sql = `SELECT * FROM personajes WHERE categoria_personaje=${VILLANO}`;
-  postgresDB.query(sql, (err, data)=>{
-    if (err) return res.json(err);
-    return res.json(data.rows);
-  });
+app.get("/Villano", async(req, res) => {
+  // const sql = `SELECT * FROM personajes WHERE categoria_personaje=${VILLANO}`;
+  // postgresDB.query(sql, (err, data)=>{
+  //   if (err) return res.json(err);
+  //   return res.json(data.rows);
+  // });
+
+
+  const client = await pool.connect()
+
+  try{
+    const {rows} = await client.query(`SELECT * FROM personajes WHERE categoria_personaje=${VILLANO}`);
+    console.log(rows)
+    client.release()
+    res.json(rows);
+  }catch(error){
+    console.error('Error al consultar la base de datos', error);
+    res.status(500).json({ error: 'Error al consultar la base de datos' });
+  }
 });
 
 
 // Select de todos los personajes LEYENDAS
-app.get("/Leyenda", (req, res) => {
-  const sql = `SELECT * FROM personajes WHERE categoria_personaje=${LEYENDA}`;
-  postgresDB.query(sql, (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data.rows);
-  });
+app.get("/Leyenda", async (req, res) => {
+  // const sql = `SELECT * FROM personajes WHERE categoria_personaje=${LEYENDA}`;
+  // postgresDB.query(sql, (err, data) => {
+  //   if (err) return res.json(err);
+  //   return res.json(data.rows);
+  // });
+
+  const client = await pool.connect()
+
+  try{
+    const {rows} = await client.query(`SELECT * FROM personajes WHERE categoria_personaje=${LEYENDA}`);
+    console.log(rows)
+    client.release()
+    res.json(rows);
+  }catch(error){
+    console.error('Error al consultar la base de datos', error);
+    res.status(500).json({ error: 'Error al consultar la base de datos' });
+  }
 });
 
 // Select de todos los personajes MARINES
-app.get("/Marine", (req, res) => {
-  const sql = `SELECT * FROM personajes WHERE categoria_personaje=${MARINE}`;
-  postgresDB.query(sql, (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data.rows);
-  });
+app.get("/Marine", async (req, res) => {
+  // const sql = `SELECT * FROM personajes WHERE categoria_personaje=${MARINE}`;
+  // postgresDB.query(sql, (err, data) => {
+  //   if (err) return res.json(err);
+  //   return res.json(data.rows);
+  // });
+
+
+  const client = await pool.connect()
+
+  try{
+    const {rows} = await client.query(`SELECT * FROM personajes WHERE categoria_personaje=${MARINE}`);
+    console.log(rows)
+    client.release()
+    res.json(rows);
+  }catch(error){
+    console.error('Error al consultar la base de datos', error);
+    res.status(500).json({ error: 'Error al consultar la base de datos' });
+  }
 });
 
 
@@ -176,12 +228,24 @@ app.get("/imagenes", (req, res) => {
 // Select de los poderes de un personaje en concreto
 app.get("/:categoria/poderes/:id", async (req,res) => {
   const id_personaje = req.params.id;
-  const sql = `SELECT * FROM poderes WHERE id_personaje=`+id_personaje;
+  //const sql = `SELECT * FROM poderes WHERE id_personaje=`+id_personaje;
   
-  postgresDB.query(sql, (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data.rows);
-  });
+  // postgresDB.query(sql, (err, data) => {
+  //   if (err) return res.json(err);
+  //   return res.json(data.rows);
+  // });
+
+  const client = await pool.connect()
+
+  try{
+    const {rows} = await client.query(`SELECT * FROM poderes WHERE id_personaje=`+id_personaje);
+    console.log(rows)
+    client.release()
+    res.json(rows);
+  }catch(error){
+    console.error('Error al consultar la base de datos', error);
+    res.status(500).json({ error: 'Error al consultar la base de datos' });
+  }
 });
 
 
