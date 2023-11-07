@@ -4,6 +4,9 @@ import axios from "axios";
 
 
 export default function Sidebar({categoria}){
+    
+
+    // ************************** FALTA HACER QUE AL CLICAR A UN PERSONAJE SALGA LA INFORMACION DE ESE PERSONAJE EN CONCRETO ***********************
 
     // Personajes cargados de la Base de datos
     const [personajesBBDD, setPersonajesBBDD] =  useState([])
@@ -34,7 +37,7 @@ export default function Sidebar({categoria}){
         if(categoria == "null"){
             setPersonajesBBDD([""])
         }else{
-            axios.get(`one-piece-opal.vercel.app/${categoria}`, {withCredentials: true})
+            axios.get(`https://one-piece-opal.vercel.app:5432/${categoria}`, {withCredentials: true})
             .then(res => {
                 setPersonajesBBDD(res.data)       
             })

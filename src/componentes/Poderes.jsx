@@ -8,7 +8,7 @@ export default function Poderes ({id_personaje, categoria_personaje}) {
 
     // Busca los poderes del personaje a parti de su id y su categoria
     useEffect(()=> {
-        axios.get(`https://one-piece-opal.vercel.app/${categoria_personaje}/poderes/${id_personaje}`, {params: {id_personaje: id_personaje}}, {withCredentials: true})
+        axios.get(`https://one-piece-opal.vercel.app:5432/${categoria_personaje}/poderes/${id_personaje}`, {params: {id_personaje: id_personaje}}, {withCredentials: true})
         .then(res => {
             if(res.data.length == 0 ){
                 setPoderes([{nombre_poder: "No se han encontrado poderes", descripcion_poder: "", video_poder: ""}]);

@@ -16,7 +16,7 @@ export default function Personaje({categoria}) {
             setPersonajeEncontrado([])
         } else {
             
-            axios.get(`https://one-piece-opal.vercel.app/${categoria}/${id}`,{params: {categoria: categoria, id: id}} ,{withCredentials: true})
+            axios.get(`https://one-piece-opal.vercel.app:5432/${categoria}/${id}`,{params: {categoria: categoria, id: id}} ,{withCredentials: true})
             .then(res => {
                 setPersonajeEncontrado(res.data);
             })
