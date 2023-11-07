@@ -20,7 +20,7 @@ const MARINE = "'Marine'";
 app.use(
   cors({
     //origin: ["http://localhost:3000"],
-    origin: ["https://one-piece-opal.vercel.app:5432"],
+    origin: ["https://one-piece-opal.vercel.app"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
@@ -57,7 +57,7 @@ app.use(
 const POSTGRES_URL = "postgres://default:uCmxVWyI06RX@ep-summer-lake-14260184-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb";
 
 const pool = new Pool({
-  connectionString: POSTGRES_URL + "?sslmode=require",
+  connectionString: POSTGRES_URL
 })
 
 
