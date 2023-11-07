@@ -1,6 +1,6 @@
 const express = require("express");
 const mysql = require("mysql");
-const {sqlvercel} = require("@vercel/postgres");
+const {sql} = require("@vercel/postgres");
 const {Pool} = require("pg");
 const cors = require("cors");
 const app = express();
@@ -93,7 +93,7 @@ app.get("/Heroe", async (req, res) => {
   // });
 
   //----
-  const {rows} = await sqlvercel`SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`;
+  const {rows} = await sql`SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`;
   return res.json(rows);
 });
 
