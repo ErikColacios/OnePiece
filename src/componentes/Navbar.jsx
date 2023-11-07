@@ -16,7 +16,7 @@ export default function Navbar(){
         const fetchData = async () => {
             
             try {
-                const res = await axios.get("ep-summer-lake-14260184-pooler.eu-central-1.postgres.vercel-storage.com", {withCredentials: true})
+                const res = await axios.get("https://one-piece-opal.vercel.app", {withCredentials: true})
                     if(res.data.valid){
                         setBotonPerfil(true)
                         setDatosUsuario(res.data.datosusuario)
@@ -31,7 +31,7 @@ export default function Navbar(){
     return (
         <div id="navbar" className="h-16">
             <div className="navbar-logo md:m-8">
-                <Link to={`/`}><img src="/imgs/icono_onepiece.png" className="w-16 sm:w-12 md:w-12 lg:w-16 sm:ml-8" alt="Logo"/></Link>
+                <Link to={`/`}><img src="/imgs/icono_onepiece.png" className="w-8 ml-8 sm:w-12 md:w-12 lg:w-16 " alt="Logo"/></Link>
             </div>
             <div className="navbar-links text-xs md:text-xs lg:text-sm xl:text-base pt-6 pb-6 2xl:pl-64">
                 <ul>

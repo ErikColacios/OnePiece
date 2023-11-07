@@ -19,8 +19,8 @@ const MARINE = "'Marine'";
 
 app.use(
   cors({
-    //origin: ["http://localhost:3000"],
-    origin: ["https://one-piece-opal.vercel.app"],
+    origin: ["http://localhost:3000"],
+    //origin: ["https://one-piece-opal.vercel.app"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
@@ -87,7 +87,7 @@ app.get("/Heroe", async (req, res) => {
   //   if (err) return res.json(err);
   //   return res.json(data);
   // });
-  // -----
+  //  ---- ESTA FORMA ES CON POSTGRESQL
   // const sql = `SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`;
   // postgresDB.query(sql, (err, data)=>{
   //   if (err) return res.json(err);
@@ -101,7 +101,6 @@ app.get("/Heroe", async (req, res) => {
     const {rows} = await client.query(`SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`);
     console.log(rows)
     client.release()
-    return res.json(rows);
   }catch(error){
     console.error('Error al consultar la base de datos', error);
     res.status(500).json({ error: 'Error al consultar la base de datos' });
