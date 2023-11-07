@@ -53,13 +53,13 @@ export default function Navbar(){
                     </li>
                 </ul>
             </div>
-            <div className="navbar-btn">
+            <div className="navbar-btn mr-6">
                 <Link to={`/login`} ><button className="btnEntrar text-xs">ENTRAR</button></Link>
             </div>
             {botonPerfil && (
                 <>
                     {datosUsuario.map((datos,id)=> (
-                        <Link to={`/perfil`} className="btn-perfil ml-6 sm:mr-8" key={id}>
+                        <Link to={`/perfil`} className="btn-perfil sm:mr-8" key={id}>
                                 <span className="text-xs xl:text-base">{datos.nombre_usuario}</span>
                                 <div className="img-perfil w-8 h-8">
                                     <img src={`/imgs/userimgs/` + datos.avatar_usuario} alt="Avatar usuario"/>
