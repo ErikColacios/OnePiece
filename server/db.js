@@ -57,7 +57,7 @@ app.use(
 const POSTGRES_URL = "postgres://default:uCmxVWyI06RX@ep-summer-lake-14260184-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb";
 
 const pool = new Pool({
-  connectionString: POSTGRES_URL
+  connectionString: POSTGRES_URL + "?sslmode=require",
 })
 
 
@@ -101,7 +101,7 @@ app.get("/Heroe", async (req, res) => {
     const {rows} = await client.query(`SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`);
     console.log(rows)
     client.release()
-    res.json(rows);
+    return res.json(rows);
   }catch(error){
     console.error('Error al consultar la base de datos', error);
     res.status(500).json({ error: 'Error al consultar la base de datos' });
