@@ -94,7 +94,7 @@ app.get("/Heroe", async (req, res) => {
 
   //----
   const {rows} = await sqlvercel`SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`;
-
+  return res.json(rows);
 });
 
 
