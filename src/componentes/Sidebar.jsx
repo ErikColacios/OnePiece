@@ -37,7 +37,7 @@ export default function Sidebar({categoria}){
         if(categoria == "null"){
             setPersonajesBBDD([""])
         }else{
-            axios.get(`https://one-piece-opal.vercel.app/${categoria}`, {withCredentials: true})
+            axios.get(`ep-summer-lake-14260184-pooler.eu-central-1.postgres.vercel-storage.com/${categoria}`, {withCredentials: true})
             .then(res => {
                 setPersonajesBBDD(res.data)       
             })

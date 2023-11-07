@@ -16,7 +16,7 @@ export default function Personaje({categoria}) {
             setPersonajeEncontrado([])
         } else {
             
-            axios.get(`https://one-piece-opal.vercel.app/${categoria}/${id}`,{params: {categoria: categoria, id: id}} ,{withCredentials: true})
+            axios.get(`ep-summer-lake-14260184-pooler.eu-central-1.postgres.vercel-storage.com/${categoria}/${id}`,{params: {categoria: categoria, id: id}} ,{withCredentials: true})
             .then(res => {
                 setPersonajeEncontrado(res.data);
             })

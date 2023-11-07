@@ -16,7 +16,7 @@ export default function Navbar(){
         const fetchData = async () => {
             
             try {
-                const res = await axios.get("https://one-piece-opal.vercel.app", {withCredentials: true})
+                const res = await axios.get("ep-summer-lake-14260184-pooler.eu-central-1.postgres.vercel-storage.com", {withCredentials: true})
                     if(res.data.valid){
                         setBotonPerfil(true)
                         setDatosUsuario(res.data.datosusuario)
