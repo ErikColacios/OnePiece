@@ -19,8 +19,8 @@ const MARINE = "'Marine'";
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
-    //origin: ["https://one-piece-opal.vercel.app"],
+    //origin: ["http://localhost:3000"],
+    origin: ["https://one-piece-opal.vercel.app"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
@@ -39,21 +39,24 @@ app.use(
   })
 );
 
+// ------Conectar a mysql local
 // const db = mysql.createConnection({
-//   host: "localhost",
+//   host: "localhost",º
 //   user: "root",
 //   password: "",
 //   database: "onepiece",
 // });
 
+// -----Conectar a postgresql local
 // const postgresDB = new Pool({
 //   host: "localhost",
 //   user: "postgres",
-//   port: 5433,
+//   port: 5432,
 //   password: "admin",
 //   database: "onepiece"
 // });
 
+// -----Conectar a postgresql de VERCEL
 const POSTGRES_URL = "postgres://default:uCmxVWyI06RX@ep-summer-lake-14260184-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb";
 
 const pool = new Pool({
@@ -68,7 +71,7 @@ app.get("/", (req, res) => {
   if (req.session.username) {
     const username = req.session.username;
     const sql = "SELECT * FROM usuarios WHERE nombre_usuario = ?";
-    db.query(sql, username, (err, data) => {
+    postgresDB.query(sql, username, (err, data) => {
       if (err) return res.json(err);
       return res.json({ valid: true, datosusuario: data });
     })
@@ -80,13 +83,13 @@ app.get("/", (req, res) => {
 
 // Select de todos los personajes HEROES
 app.get("/Heroe", async (req, res) => {
-  
   // ---- ESTA FORMA ERA LA QUE HABIA QUE USAR SI QUERIAMOS HACER LA QUERY CON MYSQL ----
   // const sql = `SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`;
   // db.query(sql, (err, data) => {
   //   if (err) return res.json(err);
   //   return res.json(data);
   // });
+
   //  ---- ESTA FORMA ES CON POSTGRESQL
   // const sql = `SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`;
   // postgresDB.query(sql, (err, data)=>{
@@ -95,8 +98,8 @@ app.get("/Heroe", async (req, res) => {
   // });
 
   //----
+  // ESTA ES LA FORMA CON POSTGRESQL DE VERCEL
   const client = await pool.connect()
-
   try{
     const {rows} = await client.query(`SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`);
     console.log(rows)
@@ -118,13 +121,14 @@ app.get("/:categoria/:id", async (req, res) => {
     categoria
   ];
 
-  //const client = await postgresDB.connect();
-
-  //const sql = `SELECT * FROM personajes WHERE id_personaje=$1 AND categoria_personaje=$2`;
-  // db.query(sql, values, (err, result) => {
+// -----Conectar a postgresql local
+  // const sql = `SELECT * FROM personajes WHERE id_personaje=$1 AND categoria_personaje=$2`;
+  // postgresDB.query(sql, values, (err, result) => {
   //   if (err) return res.json({ Message: "No se ha encontrado el personaje"});
-  //   return res.json(result);
+  //   return res.json(result.rows);
   // });
+
+  //const client = await postgresDB.connect();
   // client.query(sql, values,(err, data)=>{
   //   if (err) return res.json({ Message: "No se ha encontrado el personaje"});
   //   return res.json(data.rows);
@@ -132,6 +136,7 @@ app.get("/:categoria/:id", async (req, res) => {
 
 
 
+  // ----- Forma de conectar VERCEL POSTGRESQL
   const client = await pool.connect()
   try{
     const {rows} = await client.query(`SELECT * FROM personajes WHERE id_personaje=$1 AND categoria_personaje=$2`, values);

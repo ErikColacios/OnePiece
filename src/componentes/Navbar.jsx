@@ -16,6 +16,7 @@ export default function Navbar(){
         const fetchData = async () => {
             
             try {
+                //const res = await axios.get("http://localhost:3000", {withCredentials: true})
                 const res = await axios.get("https://one-piece-opal.vercel.app", {withCredentials: true})
                     if(res.data.valid){
                         setBotonPerfil(true)

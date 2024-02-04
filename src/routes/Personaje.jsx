@@ -12,12 +12,13 @@ export default function Personaje({categoria}) {
 
 
     useEffect(()=> {
-        if(categoria == "null"){
+        if(categoria === "null"){
             setPersonajeEncontrado([])
         } else {
-            
+            //axios.get(`http://localhost:8081/${categoria}/${id}`,{params: {categoria: categoria, id: id}} ,{withCredentials: true})
             axios.get(`https://one-piece-opal.vercel.app/${categoria}/${id}`,{params: {categoria: categoria, id: id}} ,{withCredentials: true})
             .then(res => {
+                console.log(res.data)
                 setPersonajeEncontrado(res.data);
             })
             .catch(err => console.log(err))
@@ -32,11 +33,9 @@ export default function Personaje({categoria}) {
 
         <>
             {personajeEncontrado.map((pers,ident) => (
-                <div key={ident} className="xl:flex  h-96">
+                <div key={ident} className="xl:flex h-96">
 
                     <div className="sm:m-8 xl:mr-0 xl:w-96  xl:h-[50rem]  2xl:w-[40rem]" id="personaje">
-
-
                         <div className="personaje-contenido text-sm lg:text-base">
                             <h2 className="text-2xl sm:text-4xl md:text-4xl font-bold py-4">{pers.nombre_personaje}</h2>
                             <p className="mb-4">{pers.descripcion_personaje}</p>
