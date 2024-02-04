@@ -8,6 +8,13 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const uuid = require("react-uuid");
+const dotenv = require('dotenv');
+const result = dotenv.config();
+
+if (result.error) {
+  console.error(result.error);
+  throw result.error;
+}
 
 //Constantes
 const HEROE = "'Heroe'";
@@ -15,12 +22,10 @@ const VILLANO = "'Villano'";
 const LEYENDA = "'Leyenda'";
 const MARINE = "'Marine'";
 
-
-
 app.use(
   cors({
-    //origin: ["http://localhost:3000"],
-    origin: ["https://one-piece-opal.vercel.app"],
+    origin: ["http://localhost:3000"],
+    //origin: ["https://one-piece-opal.vercel.app"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
@@ -41,7 +46,7 @@ app.use(
 
 // ------Conectar a mysql local
 // const db = mysql.createConnection({
-//   host: "localhost",º
+//   host: "localhost",
 //   user: "root",
 //   password: "",
 //   database: "onepiece",
@@ -57,13 +62,12 @@ app.use(
 // });
 
 // -----Conectar a postgresql de VERCEL
-const POSTGRES_URL = "postgres://default:uCmxVWyI06RX@ep-summer-lake-14260184-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb";
 
 const pool = new Pool({
-  connectionString: POSTGRES_URL + "?sslmode=require",
+  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
 })
 
-
+console.log(process.env.POSTGRES_URL)
 
 
 // Select del usuario que tiene la sesion 
@@ -104,6 +108,7 @@ app.get("/Heroe", async (req, res) => {
     const {rows} = await client.query(`SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`);
     console.log(rows)
     client.release()
+    res.json(rows);
   }catch(error){
     console.error('Error al consultar la base de datos', error);
     res.status(500).json({ error: 'Error al consultar la base de datos' });
@@ -373,7 +378,7 @@ app.delete("/eliminarPerfil",(req,res)=> {
 })
 
 
-app.listen(8081, () => {
+app.listen(process.env.PORT, () => {
   console.log("El servidor esta encendido");
 });
 
