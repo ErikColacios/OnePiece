@@ -33,9 +33,9 @@ export default function Sidebar({categoria}){
     useEffect(()=> {
         if(categoria == "null"){
             setPersonajesBBDD([""])
-        }else{
+        } else {
             //axios.get(`http://localhost:8081/${categoria}`, {withCredentials: true})
-            axios.get(`https://one-piece-opal.vercel.app/heroes`, {withCredentials: true})
+            axios.get(`https://one-piece-opal.vercel.app/${categoria}`, {withCredentials: true})
             .then(res => {
                 setPersonajesBBDD(res.data)
             })
