@@ -24,8 +24,8 @@ const MARINE = "'Marine'";
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
-    //origin: ["https://one-piece-opal.vercel.app"],
+    //origin: ["http://localhost:3000"],
+    origin: ["https://one-piece-opal.vercel.app"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
