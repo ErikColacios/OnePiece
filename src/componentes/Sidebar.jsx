@@ -35,7 +35,7 @@ export default function Sidebar({categoria}){
             setPersonajesBBDD([""])
         }else{
             //axios.get(`http://localhost:8081/${categoria}`, {withCredentials: true})
-            axios.get(`https://one-piece-opal.vercel.app/db/${categoria}`, {withCredentials: true})
+            axios.get(`https://one-piece-opal.vercel.app/${categoria}`, {withCredentials: true})
             .then(res => {
                 setPersonajesBBDD(res.data)
             })
