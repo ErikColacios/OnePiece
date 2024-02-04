@@ -31,7 +31,7 @@ export default function Navbar(){
     return (
         <div id="navbar" className="h-16">
             <div className="navbar-logo md:m-8">
-                <Link to={`/`}><img src="/imgs/icono_onepiece.png" className="w-8 ml-8 sm:w-12 md:w-12 lg:w-16 " alt="Logo"/></Link>
+                <Link to={`/`}><img src="/imgs/icono_onepiece.png" className="w-8 sm:w-12 md:w-12 lg:w-16 " alt="Logo"/></Link>
             </div>
             <div className="navbar-links text-xs md:text-xs lg:text-sm xl:text-base pt-6 pb-6 2xl:pl-64">
                 <ul>
@@ -53,7 +53,7 @@ export default function Navbar(){
                     </li>
                 </ul>
             </div>
-            <div className="navbar-btn">
+            <div className="navbar-btn mr-6">
                 <Link to={`/login`} ><button className="btnEntrar text-xs">ENTRAR</button></Link>
             </div>
             {botonPerfil && (

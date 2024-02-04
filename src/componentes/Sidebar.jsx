@@ -5,9 +5,6 @@ import axios from "axios";
 
 export default function Sidebar({categoria}){
     
-
-    // ************************** FALTA HACER QUE AL CLICAR A UN PERSONAJE SALGA LA INFORMACION DE ESE PERSONAJE EN CONCRETO ***********************
-
     // Personajes cargados de la Base de datos
     const [personajesBBDD, setPersonajesBBDD] =  useState([])
 
