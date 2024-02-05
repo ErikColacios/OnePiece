@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql");
 const {sql} = require("@vercel/postgres");
 const {postgresConnectionString} = require("@vercel/postgres");
+const {db} = require("@vercel/postgres");
 const {Pool} = require("pg");
 const cors = require("cors");
 const app = express();
@@ -107,7 +108,7 @@ app.get("/Heroe", async (req, res) => {
 
   //----
   // ESTA ES LA FORMA CON POSTGRESQL DE VERCEL
-  const client = await pooledConnectionString.connect()
+  const client = await db.connect()
   try{
     const {rows} = await client.query(`SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`);
     console.log(rows)
