@@ -91,7 +91,7 @@ app.get("/", (req, res) => {
 
 
 // Select de todos los personajes HEROES
-app.get("/Heroe", async (req, res) => {
+app.get("/heroes", async (req, res) => {
   // ---- ESTA FORMA ERA LA QUE HABIA QUE USAR SI QUERIAMOS HACER LA QUERY CON MYSQL ----
   // const sql = `SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`;
   // db.query(sql, (err, data) => {
