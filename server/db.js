@@ -383,9 +383,9 @@ app.delete("/eliminarPerfil",(req,res)=> {
 })
 
 
-app.listen(5432, () => {
-  console.log("El servidor esta encendido");
-});
+// app.listen(5432, () => {
+//   console.log("El servidor esta encendido");
+// });
 
 
 
