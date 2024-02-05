@@ -108,7 +108,7 @@ app.get("/heroes", async (req, res) => {
 
   //----
   // ESTA ES LA FORMA CON POSTGRESQL DE VERCEL
-  const client = await db.connect()
+  const client = await pooledConnectionString.connect()
   try{
     const {rows} = await client.query(`SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`);
     console.log(rows)
