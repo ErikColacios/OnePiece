@@ -1,6 +1,7 @@
 const express = require("express");
 const mysql = require("mysql");
 const {sql} = require("@vercel/postgres");
+const {postgresConnectionString} = require("@vercel/postgres");
 const {Pool} = require("pg");
 const cors = require("cors");
 const app = express();
@@ -63,11 +64,14 @@ app.use(
 
 // -----Conectar a postgresql de VERCEL
 
-const pool = new Pool({
-  connectionString: "postgres://default:uCmxVWyI06RX@ep-summer-lake-14260184-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb" + "?sslmode=require",
-})
+// const pool = new Pool({
+//   connectionString: "postgres://default:uCmxVWyI06RX@ep-summer-lake-14260184-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb" + "?sslmode=require",
+// })
 
-console.log(process.env.POSTGRES_URL)
+// Coger el connectionString automaticamente
+const pooledConnectionString = postgresConnectionString("pool")
+
+console.log(pooledConnectionString)
 
 
 // Select del usuario que tiene la sesion 
@@ -103,7 +107,7 @@ app.get("/Heroe", async (req, res) => {
 
   //----
   // ESTA ES LA FORMA CON POSTGRESQL DE VERCEL
-  const client = await pool.connect()
+  const client = await pooledConnectionString.connect()
   try{
     const {rows} = await client.query(`SELECT * FROM personajes WHERE categoria_personaje=${HEROE}`);
     console.log(rows)
