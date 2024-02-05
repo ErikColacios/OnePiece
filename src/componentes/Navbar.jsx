@@ -23,6 +23,7 @@ export default function Navbar(){
                         setDatosUsuario(res.data.datosusuario)
                     }
             } catch(err) {
+                console.log("Error en el NAVBAR")
                 console.log(err)
             }
         }

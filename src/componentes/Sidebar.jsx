@@ -39,7 +39,7 @@ export default function Sidebar({categoria}){
             .then(res => {
                 setPersonajesBBDD(res.data)
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log("Error EN SIDEBAR |"+ err))
         }
 }, [categoria])
 
